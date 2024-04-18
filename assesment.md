@@ -1,39 +1,45 @@
-### Mini Weather Dashboard Technical Assessment
+### Custom Game Table Technical Assessment
 
-**Objective:** Develop a minimalistic weather dashboard that retrieves and displays weather data from an external API, following a provided Figma design.
+**Objective:** Develop a custom game table web application that matches the design provided in the screenshot. Your application will retrieve game data from an external API and display it in a table with specified columns.
 
 **Project Overview:**
-- You will be provided with a Figma design for a simple weather dashboard. This design includes a search bar for entering a city and a display area for showing current weather conditions.
-- Your goal is to implement this design into a functional web application that meets the requirements outlined below.
+- You will use the attached screenshot as your design reference. The game table includes columns for the game's name, producer, minimum bet, maximum bet, qualification ID, and game version.
+- Your task is to replicate this design and functionality in a web application, ensuring the final product closely matches the visual structure and content layout.
 
 **Functional Requirements:**
-- **City Search:** Implement a search functionality allowing users to enter a city name and retrieve weather data for that location.
-- **Current Weather Display:** Display key weather details such as temperature and an associated weather icon.
+- **Data Fetching:** Retrieve game data from the provided API endpoint: [Game List API](https://gamelistmiddleware.azurewebsites.net/gamelist).
+- **Table Creation:** Dynamically create a table that displays the following columns based on the API response:
+  - Game (name of the game)
+  - Producer (company that produced the game)
+  - Min Bet (minimum bet amount)
+  - Max Bet (maximum bet amount)
+  - Qualification ID (identification code for the game's qualification)
+  - Game Version (version number of the game)
+- **Responsive Layout:** The table should be clearly readable on both desktop and mobile devices, resembling the structure in the screenshot.
 
-**Technical Requirements:**``
-- **Responsive Design:** Ensure the application is responsive and matches the provided Figma design for both mobile and desktop views.
-- **External API Usage:** Utilize an API like OpenWeatherMap to fetch the weather data.
-- **Error Handling:** Include basic error handling for situations like incorrect city input or API request failures.
-- **Loading State:** Show a simple loading indication (text or animation) while the data is being fetched.
+**Technical Requirements:**
+- **Error Handling:** Develop error handling for failed API requests or unexpected data issues.
+- **Loading Indicator:** Include a loading indicator that displays while the game data is being fetched.
+- **Style Matching:** Match the styling of the table as closely as possible to the screenshot, including fonts, colors, and spacing.
 
 **Technologies to Use:**
-- **HTML/CSS:** Use these for creating the layout and styling of your application.
-- **Vanilla JavaScript:** Employ vanilla JavaScript for DOM manipulation and handling API requests.
-- **Fetch API:** Use this to retrieve weather data from the external source.
+- **HTML/CSS:** Utilize HTML and CSS to replicate the table design and responsiveness.
+- **JavaScript:** Employ JavaScript for fetching the API data and manipulating the DOM to populate the table.
 
 **Assessment Criteria:**
-- **Code Quality:** Your code should be clean, understandable, and well-organized.
-- **Design Implementation:** Accurately translate the provided Figma design into a functional web page.
-- **Functionality:** Ensure all basic functionalities operate as expected without bugs.
-- **Usability and UX:** Your application should be straightforward and user-friendly.
+- **Accuracy:** How closely your implemented table matches the design in the screenshot.
+- **Code Quality:** The readability, organization, and efficiency of your code.
+- **Functionality:** The correct and bug-free functionality of the data fetching and table population.
+- **Design Adaptability:** The responsiveness and visual integrity of the table across various screen sizes.
+
+**Additional Considerations:**
+- Think about the user experience of interacting with your table. How could you enhance the usability of your table with additional features or design elements?
+- If you were to implement a feature to filter the games by the producer, describe how you would adjust the UI and what logic you would add to your code to support this functionality.
 
 **Deliverables:**
-- Upload your source code to a GitHub repository. Include a README with instructions on how to set up and run your project. A live demo is recommended but not required given the time constraints.
+- Push your complete source code to a GitHub repository, ensuring the README includes setup and run instructions. A live demo is not mandatory but would be viewed favorably.
 
 **Time Management Suggestions:**
-- Spend the first 10-15 minutes reviewing the API documentation and planning your implementation strategy.
-- Dedicate approximately 30-40 minutes to setting up your HTML and CSS to match the Figma design.
-- Use the following 40-50 minutes to integrate the JavaScript functionality for fetching and displaying the weather data.
-- Allow the final 15-20 minutes for thorough testing, debugging, and polishing your application.
-
-This assessment is designed to evaluate your core skills in web development: following design specifications, integrating with APIs, and crafting a functional front-end application. Manage your time effectively to showcase your best abilities. Good luck!
+- Use the first phase of your time to understand the API structure and plan your development approach.
+- Prioritize establishing the table structure and ensuring data is correctly retrieved and displayed.
+- Focus on replicating the design details in the latter half of your allotted time, followed by thorough testing on different devices to ensure responsiveness.
