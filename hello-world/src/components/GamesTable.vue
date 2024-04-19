@@ -1,5 +1,9 @@
 <template>
     <div>
+        <b-alert v-if="error" dismissible variant="danger" @dismissed="error = ''">
+            {{ error }}
+        </b-alert>
+
         <b-table striped bordered :items="games" :fields="fields" :per-page="perPage" :sort-by.sync="sortBy"
             :sort-desc.sync="sortDesc"></b-table>
     </div>
@@ -15,6 +19,7 @@ export default {
             perPage: 10,
             sortBy: '',
             sortDesc: false,
+            error: '',
             fields: [
                 { key: "name", label: "Game", sortable: true, sortableIcon: "caret-up-down" },
                 { key: "supplier", label: "Producer", sortable: true, sortableIcon: "caret-up-down" },
@@ -37,6 +42,7 @@ export default {
                 })
                 .catch((error) => {
                     console.error("Error fetching games:", error);
+                    this.error = 'Error fetching games: ' + error.message;
                 });
         },
     },
