@@ -1,29 +1,32 @@
 <template>
     <div>
-        <b-table striped bordered head-variant="dark" :items="games" :fields="fields" :per-page="perPage"></b-table>
+        <b-table striped bordered :items="games" :fields="fields" :per-page="perPage" :sort-by.sync="sortBy"
+            :sort-desc.sync="sortDesc"></b-table>
     </div>
 </template>
 
 <script>
 import axios from "axios";
+
 export default {
-    name: "GamesTable",
-    created() {
-        this.fetchGames();
-    },
     data() {
         return {
             games: [],
-            perPage: 100,
+            perPage: 10,
+            sortBy: '',
+            sortDesc: false,
             fields: [
-                { key: "name", label: "Game" },
-                { key: "supplier", label: "Producer" },
-                { key: "minBet", label: "Min Bet (CHF)" },
-                { key: "maxBet", label: "Max Bet (CHF)" },
-                { key: "qualificationId", label: "Qualification ID" },
-                { key: "version", label: "Game Version" },
+                { key: "name", label: "Game", sortable: true, sortableIcon: "caret-up-down" },
+                { key: "supplier", label: "Producer", sortable: true, sortableIcon: "caret-up-down" },
+                { key: "minBet", label: "Min Bet (CHF)", sortable: true, sortableIcon: "caret-up-down" },
+                { key: "maxBet", label: "Max Bet (CHF)", sortable: true, sortableIcon: "caret-up-down" },
+                { key: "qualificationId", label: "Qualification ID", sortable: true, sortableIcon: "caret-up-down" },
+                { key: "version", label: "Game Version", sortable: true, sortableIcon: "caret-up-down" },
             ],
         };
+    },
+    created() {
+        this.fetchGames();
     },
     methods: {
         fetchGames() {
