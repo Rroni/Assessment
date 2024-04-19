@@ -1,10 +1,21 @@
 <template>
     <div>
+        <b-container>
+            <b-row>
+                <div class="text-center">
+                    <h3>Games</h3>
+                </div>
+            </b-row>
+        </b-container>
         <b-alert v-if="error" dismissible variant="danger" @dismissed="error = ''">
             {{ error }}
         </b-alert>
 
-        <b-table striped bordered :items="games" :fields="fields" :per-page="perPage" :sort-by.sync="sortBy"
+        <b-form-group class="w-25 mb-2">
+            <b-form-input v-model="searchQuery" placeholder="Enter search term"></b-form-input>
+        </b-form-group>
+
+        <b-table striped bordered :items="filteredGames" :fields="fields" :per-page="perPage" :sort-by.sync="sortBy"
             :sort-desc.sync="sortDesc"></b-table>
     </div>
 </template>
@@ -16,10 +27,11 @@ export default {
     data() {
         return {
             games: [],
-            perPage: 10,
-            sortBy: '',
+            perPage: 100,
+            sortBy: "",
             sortDesc: false,
-            error: '',
+            error: "",
+            searchQuery: "",
             fields: [
                 { key: "name", label: "Game", sortable: true, sortableIcon: "caret-up-down" },
                 { key: "supplier", label: "Producer", sortable: true, sortableIcon: "caret-up-down" },
@@ -29,6 +41,19 @@ export default {
                 { key: "version", label: "Game Version", sortable: true, sortableIcon: "caret-up-down" },
             ],
         };
+    },
+    computed: {
+        filteredGames() {
+            if (!this.searchQuery) {
+                return this.games;
+            }
+            const search = this.searchQuery.toLowerCase();
+            return this.games.filter(game => {
+                return Object.values(game).some(value => {
+                    return value && value.toString().toLowerCase().includes(search);
+                });
+            });
+        }
     },
     created() {
         this.fetchGames();
