@@ -2,18 +2,17 @@
     <div>
         <b-container>
             <b-row>
+                <!-- Title -->
                 <div class="text-center">
                     <h3>Games Catalog</h3>
                 </div>
             </b-row>
         </b-container>
-        <b-alert v-if="errorMessage" variant="danger" dismissible @dismissed="clearErrorMessage">
-            {{ errorMessage }}
-        </b-alert>
-        <b-form-group label="Search Games" label-for="search-input" class="mb-2" label-cols-sm="3"
-            label-align-sm="right" align="center">
-            <b-form-input id="search-input" v-model="searchQuery" placeholder="Enter search term"></b-form-input>
-        </b-form-group>
+        <!-- Error alerts -->
+        <ErrorAlert :message="errorMessage" @clear="clearErrorMessage" />
+        <!-- Search field -->
+        <SearchField :query="searchQuery" @update:query="searchQuery = $event" />
+        <!-- Table -->
         <b-table striped bordered :items="filteredGames" :fields="tableFields" :per-page="perPage"
             :current-page="currentPage" :sort-by.sync="sortBy" :sort-desc.sync="sortDesc">
         </b-table>
@@ -22,9 +21,15 @@
 
 <script>
 import axios from 'axios';
+import ErrorAlert from './ErrorAlert.vue';
+import SearchField from './SearchField.vue';
 
 export default {
-    name: 'GameCatalog',
+    name: 'GamesTable',
+    components: {
+        ErrorAlert,
+        SearchField
+    },
 
     data() {
         return {
