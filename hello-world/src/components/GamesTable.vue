@@ -16,6 +16,10 @@
         <b-table striped bordered :items="filteredGames" :fields="tableFields" :per-page="perPage"
             :current-page="currentPage" :sort-by.sync="sortBy" :sort-desc.sync="sortDesc">
         </b-table>
+        <!-- Loader -->
+        <div v-if="loading" class="text-center">
+            <b-spinner label="Loading..."></b-spinner>
+        </div>
     </div>
 </template>
 
@@ -40,6 +44,7 @@ export default {
             sortDesc: false,
             errorMessage: "",
             searchQuery: "",
+            loading: false,
             tableFields: [
                 { key: "name", label: "Game", sortable: true },
                 { key: "supplier", label: "Producer", sortable: true },
@@ -63,13 +68,17 @@ export default {
 
     methods: {
         async initiateGameLoading() {
+            this.loading = true;
             try {
                 const gamesData = await this.fetchGamesDataFromAPI();
                 this.updateGamesData(gamesData);
             } catch (error) {
                 this.logErrorAndSetMessage(error, "Error fetching games");
+            } finally {
+                this.loading = false;
             }
         },
+
 
         async fetchGamesDataFromAPI() {
             const response = await axios.get("https://gamelistmiddleware.azurewebsites.net/gamelist");
